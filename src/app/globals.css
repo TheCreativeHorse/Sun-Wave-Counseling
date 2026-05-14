@@ -1,26 +1,125 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme {
+  --color-brand-cream: #FAFAF7;
+  --color-brand-sun: #F5C842;
+  --color-brand-wave: #3DD6D0;
+  --color-brand-deep: #1A7A7A;
+  --color-brand-sand: #F5E8D0;
+  --color-brand-ink: #0F0F0F;
+  --color-brand-mist: #E8F4F3;
+  --color-brand-blush: #F5EEE8;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --font-sans: var(--font-bricolage), sans-serif;
+  --font-serif: var(--font-instrument), serif;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  --animate-marquee: marquee 30s linear infinite;
+
+  @keyframes marquee {
+    0%   { transform: translateX(0%); }
+    100% { transform: translateX(-50%); }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-size: 112%;
+  }
+  body {
+    background-color: var(--color-brand-cream);
+    color: var(--color-brand-ink);
+    font-family: var(--font-sans);
+    font-size: 17px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-serif);
+  }
+}
+
+@layer utilities {
+  .blob-radius     { border-radius: 60% 40% 55% 45% / 50% 45% 55% 50%; }
+  .blob-radius-alt { border-radius: 24px 24px 60px 24px; }
+  .text-balance    { text-wrap: balance; }
+}
+
+/* ── Desktop/mobile visibility ── */
+.hide-mobile { display: flex !important; }
+.show-mobile { display: none !important; }
+
+@media (max-width: 1023px) {
+  .hide-mobile { display: none !important; }
+  .show-mobile { display: flex !important; }
+}
+
+/* Navbar — link colors (avoid inline color so :hover works) */
+.navbar-desktop-link,
+.navbar-mobile-link {
+  color: #0f0f0f;
+  transition: color 0.2s ease;
+}
+.navbar-desktop-link:hover,
+.navbar-mobile-link:hover {
+  color: #1a7a7a;
+}
+
+/* ── Mobile responsive fixes ── */
+@media (max-width: 768px) {
+
+  /* Hero section */
+  .hero-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* All two-column grids go single column */
+  [style*="gridTemplateColumns: '1fr 1fr'"],
+  [style*="gridTemplateColumns: \"1fr 1fr\""] {
+    grid-template-columns: 1fr !important;
+  }
+
+  [style*="gridTemplateColumns: '5fr 3fr'"],
+  [style*="gridTemplateColumns: \"5fr 3fr\""] {
+    grid-template-columns: 1fr !important;
+  }
+
+  [style*="gridTemplateColumns: '1fr 1fr'"] > *,
+  [style*="gridTemplateColumns: '5fr 3fr'"] > * {
+    direction: ltr !important;
+  }
+
+  /* Approach cards */
+  [style*="gridTemplateColumns: 'repeat(3, 1fr)'"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Values grid */
+  [style*="gridTemplateColumns: 'repeat(2, 1fr)'"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* About badge — reposition on mobile */
+  [style*="position: 'absolute'"][style*="right: '-24px'"] {
+    right: 0 !important;
+    bottom: -20px !important;
+  }
+
+  /* Reduce padding on mobile */
+  [style*="padding: '100px 0'"] {
+    padding: 60px 0 !important;
+  }
+
+  [style*="padding: '80px 0'"] {
+    padding: 56px 0 !important;
+  }
+
+  [style*="paddingTop: '120px'"] {
+    padding-top: 90px !important;
+  }
+
+  /* Contact form grid */
+  [style*="gridTemplateColumns: '1fr 1fr'"] .field-group {
+    grid-template-columns: 1fr !important;
+  }
 }
