@@ -109,7 +109,7 @@ export default function Hero() {
 
             {/* Photo */}
             <div style={{ backgroundColor: '#E8F4F3', borderRadius: '24px 24px 60px 24px', aspectRatio: isMobile ? '4/3' : '3/4', position: 'relative', overflow: 'hidden' }}>
-              <Image src="/images/khadija-photo.jpg" alt="Khadija Lokhandwala — Psychotherapist Toronto" fill style={{ objectFit: 'cover', objectPosition: 'center top' }} priority />
+              <Image src="/Images/khadija-photo.jpg" alt="Khadija Lokhandwala — Psychotherapist Toronto" fill style={{ objectFit: 'cover', objectPosition: 'center top' }} priority />
               <div style={{ position: 'absolute', bottom: '14px', left: '10px', right: '10px', backgroundColor: 'white', borderRadius: '10px', padding: '8px 12px', display: 'flex', alignItems: 'center', gap: '8px', boxShadow: '0 2px 12px rgba(0,0,0,0.07)' }}>
                 <div style={{ width: '28px', height: '28px', borderRadius: '50%', background: 'linear-gradient(135deg, #F5C842, #3DD6D0)', flexShrink: 0 }} />
                 <div>

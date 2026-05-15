@@ -31,13 +31,13 @@ export const metadata: Metadata = {
     siteName: 'Sun Wave Counselling Services',
     title: 'Sun Wave Counselling Services | Online Therapy in Toronto & Ontario',
     description: 'Therapy for individuals, teens, and couples in Toronto. Online sessions across Ontario. Book a free 25-minute consultation.',
-    images: [{ url: '/images/og-image.jpg', width: 1200, height: 630, alt: 'Sun Wave Counselling Services' }],
+    images: [{ url: '/Images/khadija-photo.jpg', alt: 'Sun Wave Counselling Services' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Sun Wave Counselling Services | Online Therapy in Toronto & Ontario',
     description: 'Therapy for individuals, teens, and couples in Toronto. Online sessions across Ontario.',
-    images: ['/images/og-image.jpg'],
+    images: ['/Images/khadija-photo.jpg'],
   },
 }
 

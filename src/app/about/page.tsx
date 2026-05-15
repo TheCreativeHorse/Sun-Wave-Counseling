@@ -48,7 +48,7 @@ export default function AboutPage() {
             </div>
             <div style={{ position: 'relative' }}>
               <div style={{ borderRadius: '24px', overflow: 'hidden', aspectRatio: isMobile ? '4/3' : '4/5', position: 'relative', backgroundColor: '#E8F4F3' }}>
-                <Image src="/images/khadija-photo.jpg" alt="Khadija Lokhandwala — Psychotherapist Toronto" fill style={{ objectFit: 'cover', objectPosition: 'center top' }} priority />
+                <Image src="/Images/khadija-photo.jpg" alt="Khadija Lokhandwala — Psychotherapist Toronto" fill style={{ objectFit: 'cover', objectPosition: 'center top' }} priority />
               </div>
               {!isMobile && (
                 <div style={{ position: 'absolute', bottom: '28px', right: '-20px', backgroundColor: 'white', borderRadius: '16px', padding: '16px 20px', boxShadow: '0 8px 32px rgba(0,0,0,0.10)', display: 'flex', flexDirection: 'column', gap: '8px', minWidth: '172px' }}>

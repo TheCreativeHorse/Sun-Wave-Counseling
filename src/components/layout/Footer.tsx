@@ -53,7 +53,7 @@ export default function Footer() {
           <div style={S.brand}>
             <Link href="/" style={S.logoRow as React.CSSProperties}>
               <div style={S.logoImgWrap}>
-                <Image src="/images/sunwave-logo.svg" alt="Sun Wave" width={32} height={32} style={{ display: 'block' }} />
+                <Image src="/Images/sunwave-logo.svg" alt="Sun Wave" width={32} height={32} style={{ display: 'block' }} />
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', lineHeight: 1 }}>
                 <span style={S.logoName}>Sun Wave</span>

@@ -55,7 +55,7 @@ const organizationSchema = {
   '@type': 'Organization',
   name: 'Sun Wave Counselling Services',
   url: 'https://sunwavecounselling.com',
-  logo: 'https://sunwavecounselling.com/images/sunwave-logo.svg',
+  logo: 'https://sunwavecounselling.com/Images/sunwave-logo.svg',
   contactPoint: {
     '@type': 'ContactPoint',
     email: 'sunwavecounselling@gmail.com',

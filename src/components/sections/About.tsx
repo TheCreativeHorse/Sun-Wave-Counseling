@@ -30,7 +30,7 @@ export default function About() {
           {/* Image */}
           <div style={{ position: 'relative' }}>
             <div style={{ borderRadius: '24px', overflow: 'hidden', aspectRatio: isMobile ? '4/3' : '4/5', position: 'relative', backgroundColor: '#E8F4F3' }}>
-              <Image src="/images/khadija-photo.jpg" alt="Khadija Lokhandwala — Toronto Psychotherapist" fill style={{ objectFit: 'cover', objectPosition: 'center top' }} />
+              <Image src="/Images/khadija-photo.jpg" alt="Khadija Lokhandwala — Toronto Psychotherapist" fill style={{ objectFit: 'cover', objectPosition: 'center top' }} />
             </div>
             {!isMobile && (
               <div style={S.badge}>
