@@ -1,6 +1,7 @@
 'use client'
 
-import { useState, useEffect, type CSSProperties, type MouseEvent } from 'react'
+import { useState, useEffect, type CSSProperties, type MouseEvent, type ReactNode } from 'react'
+import { createPortal } from 'react-dom'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Menu, X } from 'lucide-react'
@@ -17,15 +18,15 @@ const navLinks = [
 const JANE_URL = 'https://sunwavecounsellingservices.janeapp.com'
 
 const S = {
-  header: (scrolled: boolean): CSSProperties => ({
+  header: (scrolled: boolean, menuOpen: boolean): CSSProperties => ({
     position: 'fixed',
     top: 0,
     left: 0,
     right: 0,
-    zIndex: 50,
+    zIndex: menuOpen ? 10000 : 50,
     backgroundColor: scrolled ? 'rgba(250,250,247,0.96)' : '#FAFAF7',
     borderBottom: scrolled ? '1px solid rgba(0,0,0,0.06)' : '1px solid transparent',
-    backdropFilter: scrolled ? 'blur(8px)' : 'none',
+    backdropFilter: menuOpen ? 'none' : scrolled ? 'blur(8px)' : 'none',
     transition: 'all 0.3s ease',
   }),
   inner: { maxWidth: '1280px', margin: '0 auto', padding: '0 2rem' } as CSSProperties,
@@ -83,16 +84,20 @@ const S = {
     alignItems: 'center',
     justifyContent: 'center',
   } as CSSProperties,
+  /** Portaled to document.body so position:fixed is not trapped by header backdrop-filter */
   mobileOverlay: {
     position: 'fixed',
-    inset: 0,
-    top: '68px',
+    left: 0,
+    right: 0,
+    top: 'calc(68px + env(safe-area-inset-top, 0px))',
+    bottom: 0,
     backgroundColor: '#FAFAF7',
-    zIndex: 100,
+    zIndex: 9999,
     overflowY: 'auto' as const,
     display: 'flex',
     flexDirection: 'column' as const,
-    padding: '2rem 1.5rem',
+    padding: '1.25rem 1.5rem 2rem',
+    paddingBottom: 'calc(2rem + env(safe-area-inset-bottom, 0px))',
     gap: '4px',
   } as CSSProperties,
   mobileLink: {
@@ -146,9 +151,45 @@ function fadeCtaLeave(e: MouseEvent<HTMLAnchorElement>) {
   e.currentTarget.style.opacity = '1'
 }
 
+function MobileMenuDrawer({ onNavigate }: { onNavigate: () => void }): ReactNode {
+  return (
+    <div style={S.mobileOverlay} id="mobile-nav-drawer" role="dialog" aria-modal="true" aria-label="Site navigation">
+      {navLinks.map((link) => (
+        <Link
+          key={link.href}
+          href={link.href}
+          className="navbar-mobile-link"
+          style={S.mobileLink}
+          onClick={onNavigate}
+        >
+          {link.label}
+        </Link>
+      ))}
+      <a
+        href={JANE_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        style={S.mobileCta}
+        onClick={onNavigate}
+        onMouseEnter={fadeCtaHover}
+        onMouseLeave={fadeCtaLeave}
+      >
+        <span style={S.mobileCtaIcon}>→</span>
+        Book Consultation
+      </a>
+      <p style={S.mobileFooter}>Online therapy across Ontario · Toronto-based</p>
+    </div>
+  )
+}
+
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20)
@@ -163,8 +204,12 @@ export default function Navbar() {
     }
   }, [menuOpen])
 
+  function closeMenu() {
+    setMenuOpen(false)
+  }
+
   return (
-    <header style={S.header(scrolled)}>
+    <header style={S.header(scrolled, menuOpen)}>
       <div style={S.inner}>
         <div style={S.row}>
           <Link href="/" style={S.logoWrap}>
@@ -213,40 +258,14 @@ export default function Navbar() {
             className="show-mobile"
             aria-label={menuOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={menuOpen}
+            aria-controls="mobile-nav-drawer"
           >
             {menuOpen ? <X size={22} color="#0F0F0F" /> : <Menu size={22} color="#0F0F0F" />}
           </button>
         </div>
       </div>
 
-      {menuOpen ? (
-        <div style={S.mobileOverlay}>
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="navbar-mobile-link"
-              style={S.mobileLink}
-              onClick={() => setMenuOpen(false)}
-            >
-              {link.label}
-            </Link>
-          ))}
-          <a
-            href={JANE_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            style={S.mobileCta}
-            onClick={() => setMenuOpen(false)}
-            onMouseEnter={fadeCtaHover}
-            onMouseLeave={fadeCtaLeave}
-          >
-            <span style={S.mobileCtaIcon}>→</span>
-            Book Consultation
-          </a>
-          <p style={S.mobileFooter}>Online therapy across Ontario · Toronto-based</p>
-        </div>
-      ) : null}
+      {mounted && menuOpen ? createPortal(<MobileMenuDrawer onNavigate={closeMenu} />, document.body) : null}
     </header>
   )
 }

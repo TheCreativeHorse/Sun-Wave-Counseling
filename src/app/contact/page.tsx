@@ -10,7 +10,6 @@ const S: Record<string, React.CSSProperties> = {
   page: { backgroundColor: '#FAFAF7', minHeight: '100vh' },
   hero: { paddingTop: '120px', paddingBottom: '64px' },
   inner: { maxWidth: '1280px', margin: '0 auto', padding: '0 2rem' },
-  grid: { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '80px', alignItems: 'start' },
   eyebrow: { fontSize: '11px', fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase' as const, color: '#3DD6D0', marginBottom: '16px', display: 'block' },
   h1: { fontFamily: 'var(--font-serif)', fontSize: 'clamp(2.4rem, 5vw, 3.6rem)', lineHeight: 1.1, color: '#0F0F0F', margin: '0 0 20px' },
   h1Italic: { fontStyle: 'italic', color: '#F5C842' },
@@ -25,10 +24,8 @@ const S: Record<string, React.CSSProperties> = {
   statusText: { fontSize: '13px', fontWeight: 500, color: '#1A7A7A' },
   bookBtn: { display: 'inline-flex', alignItems: 'center', gap: '10px', backgroundColor: '#0F0F0F', color: '#FAFAF7', fontWeight: 600, fontSize: '14px', padding: '14px 24px', borderRadius: '9999px', textDecoration: 'none', marginTop: '8px' },
   bookIcon: { width: '20px', height: '20px', borderRadius: '50%', backgroundColor: '#F5C842', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '10px', color: '#0F0F0F', flexShrink: 0 },
-  form: { backgroundColor: 'white', borderRadius: '24px', padding: '40px', border: '0.5px solid rgba(15,15,15,0.08)', display: 'flex', flexDirection: 'column' as const, gap: '20px' },
   formTitle: { fontFamily: 'var(--font-serif)', fontSize: '22px', color: '#0F0F0F', margin: 0 },
   formSub: { fontSize: '13px', color: 'rgba(15,15,15,0.45)', margin: 0, marginTop: '-10px' },
-  fieldGroup: { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' },
   field: { display: 'flex', flexDirection: 'column' as const, gap: '6px' },
   label: { fontSize: '12px', fontWeight: 600, color: 'rgba(15,15,15,0.55)', letterSpacing: '0.04em' },
   input: { fontSize: '14px', color: '#0F0F0F', backgroundColor: '#FAFAF7', border: '1px solid rgba(15,15,15,0.12)', borderRadius: '10px', padding: '12px 14px', outline: 'none', fontFamily: 'var(--font-sans)', transition: 'border-color 0.2s' },
@@ -57,7 +54,7 @@ export default function ContactPage() {
 
       <section style={S.hero}>
         <div style={S.inner}>
-          <div style={S.grid}>
+          <div className="contact-page-grid">
 
             <div>
               <span style={S.eyebrow}>Get in touch</span>
@@ -95,7 +92,7 @@ export default function ContactPage() {
               </div>
             </div>
 
-            <div style={S.form}>
+            <div className="contact-form-card">
               {submitted ? (
                 <div style={S.success}>
                   ✓ Message sent! Khadija will be in touch within 1–2 business days.
@@ -106,7 +103,7 @@ export default function ContactPage() {
                   <p style={S.formSub}>Prefer email? No problem — we&apos;ll get back to you within 1–2 business days.</p>
 
                   <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                    <div style={S.fieldGroup}>
+                    <div className="contact-field-row">
                       <div style={S.field}>
                         <label style={S.label}>First name</label>
                         <input name="firstName" value={form.firstName} onChange={handleChange} required style={S.input} placeholder="Jane" />

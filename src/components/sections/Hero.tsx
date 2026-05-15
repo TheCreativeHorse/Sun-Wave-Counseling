@@ -108,9 +108,32 @@ export default function Hero() {
           <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '5fr 3fr', gap: '12px', alignItems: 'stretch' }}>
 
             {/* Photo */}
-            <div style={{ backgroundColor: '#E8F4F3', borderRadius: '24px 24px 60px 24px', aspectRatio: isMobile ? '4/3' : '3/4', position: 'relative', overflow: 'hidden' }}>
-              <Image src="/Images/khadija-photo.jpg" alt="Khadija Lokhandwala — Psychotherapist Toronto" fill style={{ objectFit: 'cover', objectPosition: 'center top' }} priority />
-              <div style={{ position: 'absolute', bottom: '14px', left: '10px', right: '10px', backgroundColor: 'white', borderRadius: '10px', padding: '8px 12px', display: 'flex', alignItems: 'center', gap: '8px', boxShadow: '0 2px 12px rgba(0,0,0,0.07)' }}>
+            <div style={{ backgroundColor: '#E8F4F3', borderRadius: '24px 24px 60px 24px', aspectRatio: isMobile ? '3/4' : '3/4', position: 'relative', overflow: 'hidden' }}>
+              <Image
+                src="/Images/khadija-photo.jpg"
+                alt="Khadija Lokhandwala — Psychotherapist Toronto"
+                fill
+                style={{
+                  objectFit: 'cover',
+                  objectPosition: isMobile ? 'center 62%' : 'center top',
+                }}
+                priority
+              />
+              <div
+                style={{
+                  position: 'absolute',
+                  ...(isMobile
+                    ? { top: '12px', left: '10px', right: '10px', bottom: 'auto' }
+                    : { bottom: '14px', left: '10px', right: '10px' }),
+                  backgroundColor: 'white',
+                  borderRadius: '10px',
+                  padding: '8px 12px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  boxShadow: '0 2px 12px rgba(0,0,0,0.07)',
+                }}
+              >
                 <div style={{ width: '28px', height: '28px', borderRadius: '50%', background: 'linear-gradient(135deg, #F5C842, #3DD6D0)', flexShrink: 0 }} />
                 <div>
                   <div style={{ fontSize: '12px', fontWeight: 600, color: '#0F0F0F' }}>Khadija L.</div>
